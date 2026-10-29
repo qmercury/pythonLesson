@@ -1,0 +1,24 @@
+name: Python lesson example syntax
+
+on:
+  push:
+    paths:
+      - 'examples/**'
+      - 'tests/check_examples.py'
+      - '.github/workflows/example-syntax.yml'
+  pull_request:
+    paths:
+      - 'examples/**'
+      - 'tests/check_examples.py'
+      - '.github/workflows/example-syntax.yml'
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate 36 examples without running GUIs
+        run: python tests/check_examples.py

@@ -14,6 +14,17 @@
 **수업 기준:** 각 차시 90분(학급 상황에 맞게 조정)  
 **학습 흐름:** SPIKE Prime Python → Turtle → Tkinter → Flet
 
+
+## 차시별 실행 예제 (총 36개)
+
+- [Turtle 1~12차시 예제](examples/turtle/README.md): Thonny에서 F5 실행 (추가 설치 없음)
+- [Tkinter 1~12차시 예제](examples/tkinter/README.md): 데스크톱 GUI와 파일 저장
+- [Flet 1~12차시 예제](examples/flet/README.md): Flet 설치 필요, PC/휴대폰 개발 테스트
+
+각 과정 커리큘럼 표에서 **차시 번호를 클릭하면** 바로 해당 Python 예제 파일이 열립니다.
+
+**검증 범위:** 코드 문법·파일 개수 자동 검사 구성. 실제 GUI 표시와 휴대폰 동작은 운영체제·Flet 버전별로 수업 전 확인이 필요합니다.
+
 ## 문서 목록
 
 - [Turtle 12차시](curriculum/turtle/README.md)

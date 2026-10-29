@@ -8,6 +8,11 @@
 - 최종 결과: 학생이 구상한 작동하는 PC용 앱 1개
 - 세부 지도안: [1차시 — 나의 첫 윈도우 프로그램](lesson-01.md)
 
+
+## 실행 가능한 예제 코드
+
+[**1~12차시 예제 전체 보기**](../../examples/tkinter/README.md) — 차시 번호를 클릭하면 `lesson-XX.py`를 확인할 수 있습니다.
+
 ## 학습 목표
 
 1. 콘솔 출력과 GUI 위젯의 차이를 설명한다.
@@ -20,18 +25,18 @@
 
 | 차시 | 주제 | 결과물 | 핵심 요소 |
 |---:|---|---|---|
-| 01 | 나의 첫 윈도우 프로그램 | 자기소개 앱 | Tk, Label, pack, mainloop |
-| 02 | 버튼으로 조작하기 | 클릭 카운터 | Button, command, 함수 |
-| 03 | 입력받고 보여주기 | 이름·점수 입력 앱 | Entry, get, StringVar |
-| 04 | 화면 배치 설계 | 계산기 UI | Frame, grid, pack |
-| 05 | 계산기 동작 구현 | 사칙연산 계산기 | 조건문, 형변환, 예외 처리 |
-| 06 | 선택형 프로그램 | 퀴즈/로봇경기 점수판 | Radiobutton, Checkbutton |
-| 07 | 시간에 반응하는 앱 | 타이머·스톱워치 | after, 상태 변수 |
-| 08 | 화면에 도형 움직이기 | 가상 로봇 제어 패널 | Canvas, 좌표 |
-| 09 | 키보드와 그래픽 | 장애물 회피 미니게임 | bind, 충돌 판정 |
-| 10 | 기록 저장·읽기 | 경기 기록 관리 | csv, Listbox/Treeview |
-| 11 | 자유 프로젝트 설계 | 앱 1차 버전 | 화면 설계, 함수 분리 |
-| 12 | 테스트·완성·발표 | 앱 최종 버전 | 오류 처리, 사용성 테스트 |
+| [01](../../examples/tkinter/lesson-01.py) | 나의 첫 윈도우 프로그램 | 자기소개 앱 | Tk, Label, pack, mainloop |
+| [02](../../examples/tkinter/lesson-02.py) | 버튼으로 조작하기 | 클릭 카운터 | Button, command, 함수 |
+| [03](../../examples/tkinter/lesson-03.py) | 입력받고 보여주기 | 이름·점수 입력 앱 | Entry, get, StringVar |
+| [04](../../examples/tkinter/lesson-04.py) | 화면 배치 설계 | 계산기 UI | Frame, grid, pack |
+| [05](../../examples/tkinter/lesson-05.py) | 계산기 동작 구현 | 사칙연산 계산기 | 조건문, 형변환, 예외 처리 |
+| [06](../../examples/tkinter/lesson-06.py) | 선택형 프로그램 | 퀴즈/로봇경기 점수판 | Radiobutton, Checkbutton |
+| [07](../../examples/tkinter/lesson-07.py) | 시간에 반응하는 앱 | 타이머·스톱워치 | after, 상태 변수 |
+| [08](../../examples/tkinter/lesson-08.py) | 화면에 도형 움직이기 | 가상 로봇 제어 패널 | Canvas, 좌표 |
+| [09](../../examples/tkinter/lesson-09.py) | 키보드와 그래픽 | 장애물 회피 미니게임 | bind, 충돌 판정 |
+| [10](../../examples/tkinter/lesson-10.py) | 기록 저장·읽기 | 경기 기록 관리 | csv, Listbox/Treeview |
+| [11](../../examples/tkinter/lesson-11.py) | 자유 프로젝트 설계 | 앱 1차 버전 | 화면 설계, 함수 분리 |
+| [12](../../examples/tkinter/lesson-12.py) | 테스트·완성·발표 | 앱 최종 버전 | 오류 처리, 사용성 테스트 |
 
 ## 차시별 지도 및 미션
 
