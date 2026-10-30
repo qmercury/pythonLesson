@@ -21,10 +21,10 @@ Tkinter 조종기  --publish-->  [MQTT server]  --subscribe-->  Tkinter 수신 U
                                                             |
                                           +-----------------+-----------------+
                                           |                                   |
-                                       EV3 (ev3dev)                    SPIKE Prime (Pybricks)
+                                       EV3 (Pybricks Legendary)                    SPIKE Prime (Pybricks)
                                           |                                   |
-                                     Wi-Fi/SSH 또는                  BLE Nordic UART / Pybricks
-                                     EV3측 MQTT 클라이언트             허브 프로그램
+                                     Bluetooth Classic RFCOMM           BLE Nordic UART / Pybricks
+                                     검증된 Web Serial 방식           허브 프로그램
 ```
 
 학생 두 명은 직접 TCP 연결을 만드는 것이 아니라 **같은 브로커를 통해 publish/subscribe**합니다. 교실에서는 교사 PC 또는 Raspberry Pi 4에 브로커를 두는 것을 권장합니다.
@@ -41,8 +41,8 @@ Tkinter 조종기  --publish-->  [MQTT server]  --subscribe-->  Tkinter 수신 U
 | 06 | 다른 PC에서 받아 실행하기 | Canvas 로봇 시뮬레이터 | 수신·검증·처리 |
 | 07 | 결과를 다시 보내기 | 양방향 상태 표시 | cmd/status, 왕복 통신 |
 | 08 | 통신 사고 예방 | 유효 시간, STOP, 중복 처리 | 안전, 재전송, fail-safe |
-| 09 | 로봇 연결 브리지 설계 | 로봇별 어댑터 인터페이스 | 모듈·계층 분리 |
-| 10 | EV3 또는 SPIKE 연결 | 저속 모터 1개 실험 | 실제 장치 통신 *(장비별 검증)* |
+| 09 | EV3 Legendary 시리얼 브리지 | Web Serial과 pyserial 방식 비교 | MQTT와 직렬포트 연결 |
+| 10 | EV3 Legendary 실제 연결 | 손 씻기 스테이션 v8 통신 활용, 저속 모터 실험 | Bluetooth Classic 직렬통신 *(명령 형식 검증)* |
 | 11 | IoT 종합 프로젝트 | 원격 조종+상태 시각화 | 시스템 통합 |
 | 12 | 다른 팀과 교차 테스트·발표 | 시연과 연구일지 | 테스트, 원인 분석, 개선 |
 
@@ -101,12 +101,15 @@ Tkinter 조종기  --publish-->  [MQTT server]  --subscribe-->  Tkinter 수신 U
 
 ### 09. 로봇 브리지 설계
 - 기본: `execute(action, duration_ms, speed_pct)` 형태의 어댑터 인터페이스 설계
-- 응용: 가상 로봇/EV3/SPIKE 중 하나를 선택하는 구조도
-- 도전: MQTT 메시지/로봇별 모터 API를 별도 모듈로 분리
+- 응용: 손 씻기 스테이션 v8에서 성공한 Web Serial 방식과 Python pyserial 차이 설명
+- 도전: MQTT와 Bluetooth 통신 코드를 독립된 모듈로 분리
+- 참고: [EV3 Legendary 연결 조사](../../docs/ev3-legendary-serial.md), [PC 시리얼 장치 목록 확인](../../examples/mqtt-iot/ev3_serial_ports.py)
 - 이 차시는 실제 구동 없이 인터페이스 설계와 모의 실험으로 진행
 
 ### 10. 실제 장치 연결
-- EV3(ev3dev): Wi-Fi/SSH 또는 EV3 측 MQTT로 브리지 확장 가능. 기존 ev3dev Python 버전/모터 포트 확인 필요.
+- EV3는 **Pybricks Legendary + Bluetooth Classic 직렬통신**으로 진행한다. 기존 ev3dev Wi-Fi/SSH 설명은 적용하지 않는다.
+- **2026-10-29 사용자 실습 확인:** 로보타그램 손 씻기 스테이션 v8에서 EV3 Legendary의 Bluetooth Classic 연결을 Chrome Web Serial로 확인했다. 모터의 방향을 판단하여 영상 재생/종료 동작을 구현했다.
+- **남은 과제:** 브라우저 Web Serial 연결의 실제 프레이밍/메시지 형식과 PC Python의 pyserial 접근 가능 여부는 별도로 확인한다. 기존 v8 소스 분석 전에는 일반 텍스트를 EV3에 임의 송신하지 않는다.
 - SPIKE Prime(Pybricks): **공식 BLE Nordic UART 통신 사례** 기반으로 허브 입력을 받아 미리 지정된 동작만 실행. 허브 펌웨어와 통신 API 확인 필수.
 - **기본** 모터 하나를 저속·짧은 시간 움직였다가 자동 정지
 - **응용** 센서 상태를 PC에 전달

@@ -36,6 +36,7 @@
 - [Flet 12차시 초안](curriculum/flet/README.md)
 - [Tkinter + MQTT + LEGO 로봇 IoT 12차시 설계](curriculum/mqtt-iot/README.md)
 - [MQTT 양방향 통신 실습 코드](examples/mqtt-iot/README.md)
+- [EV3 Legendary Bluetooth 직렬통신 설계](docs/ev3-legendary-serial.md)
 - [교수·학습 운영 기준](docs/teaching-guide.md)
 - [Thonny 및 개발환경 안내](docs/environment.md)
 
@@ -52,7 +53,7 @@
 - Turtle, Tkinter: **12차시 교육과정 1차 정리**
 - Tkinter 1차시: **상세 지도안**
 - Flet: **휴대폰 테스트를 포함한 12차시 설계 초안**
-- MQTT IoT: **12차시 심화 설계 및 PC 통신/시뮬레이터 예제**, EV3/SPIKE 실제 모터 제어 어댑터는 장비별 검증 후 추가 (실습 예제와 사용 버전은 개강 전 검증)
+- MQTT IoT: **12차시 심화 설계 및 PC 통신/시뮬레이터 예제**, EV3 Legendary Web Serial 연결은 손 씻기 스테이션 v8에서 검증됨. Python↔EV3 연결 어댑터 및 SPIKE BLE 모터 제어는 별도 검증 후 추가 (실습 예제와 사용 버전은 개강 전 검증)
 - 수업별 학생 코드, 정답 코드, 워크시트: **추가 예정**
 
 참고: [Python turtle 문서](https://docs.python.org/ko/3/library/turtle.html) · [Python tkinter 문서](https://docs.python.org/ko/3/library/tkinter.html) · [Thonny](https://thonny.org/) · [Flet 공식 문서](https://flet.dev/docs/)

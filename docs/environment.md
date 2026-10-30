@@ -89,3 +89,12 @@ ft.run(main)
 - [IoT 예제 실행 방법](../examples/mqtt-iot/README.md)에서 채팅 → 원격조종 → 가상 로봇 순서로 실습합니다.
 - MQTT 통신용 백그라운드 스레드에서 Tkinter 위젯을 직접 수정하지 말고 `queue.Queue` + `root.after()`로 메인 스레드에 전달합니다.
 - 실제 EV3/SPIKE Prime 하드웨어를 움직이는 브리지는 기종·펌웨어·포트별로 개발 및 안전 검증이 필요합니다. 예제의 시뮬레이터는 실제 모터를 제어하지 않습니다.
+
+## EV3 Legendary Bluetooth 직렬통신
+
+- 2026-10-29 로보타그램 손 씻기 스테이션 v8에서 **EV3 Legendary ↔ Chrome Web Serial 연결 성공**이 확인되었습니다.
+- 이번 IoT 심화과정에서는 EV3에 ev3dev Wi-Fi/SSH를 설치하지 않고 **Pybricks Legendary**를 유지합니다.
+- 브라우저 Web Serial은 이미 실습한 경로입니다. Tkinter의 Python `pyserial` 연결은 PC OS에서 실제 COM/tty 시리얼 장치가 보이는지 별도로 확인합니다.
+- Thonny의 패키지 관리자에서 `pyserial`을 설치한 후 [포트 확인 예제](../examples/mqtt-iot/ev3_serial_ports.py)를 실행합니다.
+- 포트가 목록에 보인다는 사실만으로 EV3 사용자 프로그램과 임의 문자열 통신이 된다는 뜻은 아닙니다. 손 씻기 스테이션 v8의 성공한 메시지 처리 코드를 분석해 재사용합니다.
+- [EV3 Legendary 연결 설계 메모](ev3-legendary-serial.md)

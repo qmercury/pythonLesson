@@ -8,7 +8,7 @@
 - 교사 서버: 동일 교실 LAN의 Raspberry Pi 4 또는 PC에 설치한 MQTT 브로커(Mosquitto 추천)
 - 학생 A, 학생 B: Thonny + 데스크톱 Python 3.10 이상 + paho-mqtt 2.x
 - 공통 네트워크: 학생 두 컴퓨터에서 브로커 IP로 접속할 수 있어야 함
-- 실제 로봇을 연결하는 단계에서는 별도로 Pybricks/ev3dev 통신 장치 준비
+- 실제 로봇을 연결하는 단계에서는 별도로 Pybricks Legendary EV3 Bluetooth Classic 또는 SPIKE Prime BLE 준비
 
 ## 0. 교사 서버 설정 (Ubuntu 24.04/Raspberry Pi 예시)
 
@@ -113,12 +113,16 @@ JSON 명령은 예를 들어 다음과 같은 형태입니다:
 
 **지금 예제는 실제 모터를 전혀 제어하지 않습니다.** 실제 로봇 어댑터는 다음 방식으로 별도 구현해야 합니다.
 
-### EV3 (ev3dev 계열)
-- PC B와 EV3를 같은 로컬 네트워크에 연결하고 SSH/EV3 측 에이전트를 통해 제어
-- EV3의 Python 버전 및 기존 상주 서비스, 모터 포트를 확인해야 함
-- 네트워크 명령이 실종되더라도 EV3 내부에서 **짧은 시간 후 자동 정지**하도록 설계
-- 예: 미리 시작한 EV3 프로그램이 안전한 명령만 허용하는 별도의 제어 프로토콜을 사용
-- 참고: https://ev3dev-lang-python.readthedocs.io/en/latest/
+### EV3 (Pybricks Legendary + Bluetooth Classic)
+
+- **기존 검증 결과:** 2026-10-29 로보타그램 손 씻기 스테이션 v8에서 Chrome의 Web Serial을 통해 EV3 Legendary 연결 확인. EV3 모터 회전 방향에 따라 영상 재생과 종료를 수행.
+- 따라서 **Bluetooth Classic ↔ PC 연결 가능성 자체는 검증된 상황**이고, 다음 단계는 v8의 실제 통신 형식을 재사용하는 것입니다.
+- 단, Web Serial의 직렬포트 접근과 Tkinter/Python의 `pyserial` 포트 접근은 서로 다른 실행 환경입니다. 같은 장치를 사용할 수 있는지 OS별 장치 목록을 확인하세요: [ev3_serial_ports.py](ev3_serial_ports.py).
+- Python에서 직렬포트를 직접 열 수 있다면 **Tkinter → MQTT → 수신 PC Python → pyserial → EV3** 구조로 진행합니다.
+- 직접 포트를 열 수 없다면 성공한 **Web Serial 브라우저 연결은 유지**하고 수신 PC에서 MQTT 명령을 브라우저 연결 코드로 전달하는 로컬 브리지 구조로 연결합니다.
+- **주의:** Pybricks 펌웨어의 프로그램 업로드용 RFCOMM 호스트 명령과 사용자 프로그램에서 사용하는 데이터 채널은 다를 수 있습니다. v8에서 실제 송수신한 바이트/프레이밍을 확인하기 전에는 임의의 텍스트나 모터 명령을 직렬포트로 송신하지 마세요.
+- 실제 로봇에서는 독립적인 모터 자동정지, 명령 유효시간, 비정상 메시지 거부를 필수로 구현합니다.
+- [통신 경로 상세 설명](../../docs/ev3-legendary-serial.md)
 
 ### SPIKE Prime (Pybricks 계열)
 - PC B에서 Pybricks BLE/Nordic UART 채널을 통해 허브에 명령 전달
@@ -143,6 +147,7 @@ JSON 명령은 예를 들어 다음과 같은 형태입니다:
 | [mqtt_controller.py](mqtt_controller.py) | MQTT 명령 발행·상태 구독 |
 | [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py) | 명령 검증·수신·시뮬레이터·상태 발행 |
 | [protocol.py](protocol.py) | JSON 명령 형식·안전 검사 |
+| [ev3_serial_ports.py](ev3_serial_ports.py) | Windows/macOS의 Python 직렬포트 확인 (송신하지 않음) |
 | [test_mqtt_protocol.py](../../tests/test_mqtt_protocol.py) | 명령 허용/거부 자동 테스트 |
 
 [12차시 커리큘럼](../../curriculum/mqtt-iot/README.md)
