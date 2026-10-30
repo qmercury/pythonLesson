@@ -4,7 +4,7 @@
 
 - 대상: 초등 4~6학년 / SPIKE Prime Python 기초 + Tkinter 기본
 - 시간: **90분 × 12차시**
-- 목표: Tkinter 앱 → MQTT → 다른 PC → (추후) EV3 Legendary 블루투스 직렬통신까지 연결
+- 목표: **콘솔 송수신 → 콘솔 채팅 → Tkinter 채팅 → MQTT 로봇 명령 → (추후) EV3 Legendary Bluetooth**까지 연결
 - 준비 순서: **교사 단독 이해·시험 → 두 PC 실습 → 학생 팀 실습 → 실물 로봇 연동**
 - 단계 구분: PC 간 MQTT 예제와 가상 로봇은 작성됨. **Pybricks Legendary 실제 명령 송수신 어댑터는 아직 구현·검증 전.**
 - 교사 첫 수업 전: [교사 실습·점검표](TEACHER-PRACTICE.md) → [1차시 자료](lessons/lesson-01.md).
@@ -89,7 +89,23 @@ Payload: {"action": "forward"}
 
 **교사 메모:** QoS 1이라고 안전한 것은 아니다. 중복된 `forward`를 두 번 실행하면 로봇이 예상보다 멀리 갈 수 있다. 수신 프로그램에서 `id` 중복 검사를 하는 이유다. MQTT의 성공 ACK와 실제 모터 실행 성공 ACK도 다르다.
 
-## 5. Python 코드가 동작하는 흐름
+## 5. 첫 수업은 콘솔 입출력부터
+
+처음부터 Tkinter GUI로 시작하지 않고 다음의 4개 명령을 차례로 익힌다.
+
+```python
+message = input("보낼 메시지: ")       # 학생이 직접 입력
+client.publish(TOPIC, message)        # 브로커에 메시지 발행
+
+def on_message(client, userdata, msg):
+    print(msg.payload.decode("utf-8")) # 받은 메시지를 콘솔에 출력
+```
+
+**주의:** 위 코드는 전체 프로그램에서 학습에 필요한 일부만 보여 준 것이다. 실제 실행에는 연결·구독·콜백 등록·네트워크 루프가 필요하다. 완성된 첫 예제는 [단방향 수신](../../examples/mqtt-iot/step01_subscriber.py), [단방향 송신](../../examples/mqtt-iot/step02_publisher.py), [콘솔 양방향 채팅](../../examples/mqtt-iot/step03_console_chat.py)이다.
+
+학생에게 가장 먼저 말할 문장: **"이제 Python의 `print()`가 내 컴퓨터가 아니라 친구 컴퓨터에 메시지를 표시하게 만들어 봅시다."**
+
+## 6. Tkinter로 확장하면 코드가 동작하는 흐름
 
 ```text
 ① MQTT 클라이언트 객체 생성
@@ -106,7 +122,7 @@ Payload: {"action": "forward"}
 
 **교사 설명 문장:** "방송을 듣는 직원과 화면을 그리는 직원이 서로 다른 일을 해요. 받은 방송을 메모함(queue)에 넣으면 화면 담당 직원이 가져가서 보여 줍니다."
 
-## 6. MQTT와 Bluetooth 직렬통신은 서로 다른 계층
+## 7. MQTT와 Bluetooth 직렬통신은 서로 다른 계층
 
 | 경로 | 역할 |
 |---|---|
@@ -116,26 +132,28 @@ Payload: {"action": "forward"}
 
 **기존 실습 사실:** 로보타그램 손 씻기 스테이션 v8에서 **EV3 Legendary → Chrome Web Serial → 화면 제어**가 동작했다. 하지만 **컴퓨터에서 EV3로 사용자 명령을 전송하여 모터를 움직이는 역방향은 별도 검증**이 필요하다. Web Serial의 성공과 Python `pyserial` 연결의 성공도 동일하지 않다. 상세: [EV3 직렬 연결 설계](../../docs/ev3-legendary-serial.md).
 
-## 7. 수업의 안전한 순서
+## 8. 수업의 안전한 순서
 
 1. **종이 메시지 카드**로 방송실 역할놀이
-2. 같은 PC 또는 두 PC에서 **채팅**; 모터 없음
-3. **Tkinter 원격조종기와 가상 Canvas 로봇** 연결
-4. **양방향 상태·오류·연결 끊김** 실습
-5. 별도 장비 시험 후 **EV3 Legendary** 연결
-6. 저속·짧은 이동·자동 정지 검증 후 프로젝트 확장
+2. **한쪽 송신 → 다른 쪽 콘솔 출력**으로 publish/subscribe 확인
+3. **양쪽 콘솔에서 입력하고 받기**로 양방향 통신
+4. **Tkinter 채팅**으로 GUI 추가
+5. **Tkinter 원격조종기와 가상 Canvas 로봇** 연결
+6. **양방향 상태·오류·연결 끊김** 실습
+7. 별도 장비 시험 후 **EV3 Legendary** 연결
+8. 저속·짧은 이동·자동 정지 검증 후 프로젝트 확장
 
 브로커 1883 포트는 교실 LAN에서만 허용하고 인증·ACL을 사용한다. 외부 인터넷에 노출하지 않는다. 실물 로봇은 **장치 내부 watchdog 및 독립 정지 기능**을 갖춰야 한다.
 
-## 8. 12차시 지도 개요
+## 9. 12차시 지도 개요
 
 | 차시 | 교사가 시연할 것 | 학생이 만들 것 | 자세한 자료 |
 |---:|---|---|---|
 | 01 | 메시지 역할놀이 | 역할·토픽 카드 | [1차시](lessons/lesson-01.md) |
-| 02 | 메시지 전송 | MQTT 발행 | [2차시](lessons/lesson-02.md) |
-| 03 | PC 간 대화 | Tkinter 채팅 | [3차시](lessons/lesson-03.md) |
-| 04 | 방향 버튼 | Tkinter 조종기 | [4차시](lessons/lesson-04.md) |
-| 05 | JSON 명령 | 로봇 명령 카드 | [5차시](lessons/lesson-05.md) |
+| 02 | A가 전송하면 B의 콘솔에 표시 | 단방향 송신/수신 | [2차시](lessons/lesson-02.md) |
+| 03 | 두 PC에서 Shell 양방향 채팅 | 콘솔 입력/출력 | [3차시](lessons/lesson-03.md) |
+| 04 | 콘솔 채팅을 GUI로 변환 | Tkinter 채팅 | [4차시](lessons/lesson-04.md) |
+| 05 | GUI 버튼으로 JSON 명령 전송 | Tkinter 로봇 조종기 | [5차시](lessons/lesson-05.md) |
 | 06 | Canvas 움직임 | PC 간 가상 로봇 제어 | [6차시](lessons/lesson-06.md) |
 | 07 | 결과 회신 | 상태 표시 | [7차시](lessons/lesson-07.md) |
 | 08 | 중복·지연 오류 | 안전 검사 | [8차시](lessons/lesson-08.md) |

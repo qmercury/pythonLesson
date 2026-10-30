@@ -17,7 +17,8 @@
 - [ ] 브로커 IP 확인, 포트 1883 접근 허용 여부 확인 (교실 LAN 한정)
 - [ ] MQTT 접속 계정/비밀번호 (교사용 별도 보관, GitHub에 업로드하지 않음)
 - [ ] Thonny에 `paho-mqtt` 2.x 설치
-- [ ] [MQTT 채팅 예제](../../examples/mqtt-iot/mqtt_chat.py), [조종기](../../examples/mqtt-iot/mqtt_controller.py), [가상 로봇](../../examples/mqtt-iot/mqtt_gateway_simulator.py), `protocol.py` 복사
+- [ ] [콘솔 수신](../../examples/mqtt-iot/step01_subscriber.py), [콘솔 송신](../../examples/mqtt-iot/step02_publisher.py), [콘솔 채팅](../../examples/mqtt-iot/step03_console_chat.py) 준비
+- [ ] [Tkinter 채팅](../../examples/mqtt-iot/mqtt_chat.py), [조종기](../../examples/mqtt-iot/mqtt_controller.py), [가상 로봇](../../examples/mqtt-iot/mqtt_gateway_simulator.py), `protocol.py` 복사
 
 ## 3단계 — 브로커가 무엇인지 직접 느껴 보기
 
@@ -39,7 +40,21 @@ mosquitto_pub -h 192.168.0.10 -p 1883 -u classroom -P '비밀번호' -t 'robotta
 
 **실험:** `class02` 채널만 구독한 터미널에서는 `class01` 메시지가 안 나타나는지 확인한다.
 
-## 4단계 — Tkinter 채팅
+## 4단계 — 2차시 콘솔 단방향 통신
+
+1. 학생 B(수신자) PC에서 `step01_subscriber.py` 실행, 연결 완료/구독 표시 확인.
+2. 학생 A(송신자) PC에서 `step02_publisher.py` 실행.
+3. 학생 B의 Thonny Shell에 실제 메시지가 출력되는지 확인.
+4. `PAYLOAD`를 변경해 다시 송신하고, 서로 다른 `ROOM`이면 메시지가 안 오는지 관찰.
+
+## 5단계 — 3차시 콘솔 양방향 채팅
+
+1. 두 PC에서 `step03_console_chat.py`를 각각 실행.
+2. `나의 별명`을 입력하고, `보낼 메시지:`에 문장을 입력해 Enter.
+3. A/B 양쪽 콘솔에 `[받음]`이 나타나는지 확인.
+4. 자신이 보낸 메시지도 표시되는 이유를 '둘 다 구독자'로 설명.
+
+## 6단계 — 4차시 Tkinter 채팅
 
 1. 양쪽 PC에서 `MQTT_HOST`, `MQTT_USER`, `MQTT_PASSWORD`, `MQTT_ROOM`을 동일하게 구성.
 2. `mqtt_chat.py`를 두 PC에서 각각 실행.
@@ -50,7 +65,7 @@ mosquitto_pub -h 192.168.0.10 -p 1883 -u classroom -P '비밀번호' -t 'robotta
 
 **Thonny 주의:** 터미널의 `export MQTT_HOST=...`가 이미 열려 있는 Thonny 프로세스에는 적용되지 않을 수 있다. 준비된 실행 스크립트/환경변수 설정으로 Thonny에서 직접 확인한다.
 
-## 5단계 — 명령 → 가상 로봇 → 상태 회신
+## 7단계 — 5~7차시 명령 → 가상 로봇 → 상태 회신
 
 1. B 컴퓨터에서 `mqtt_gateway_simulator.py` 실행.
 2. A 컴퓨터에서 `mqtt_controller.py` 실행.
@@ -60,7 +75,7 @@ mosquitto_pub -h 192.168.0.10 -p 1883 -u classroom -P '비밀번호' -t 'robotta
 6. B를 끈 뒤 A가 계속 메시지를 보내면 실제로 실행되는 로봇은 없음을 확인한다.
 7. **이 단계에서는 실제 EV3 모터를 연결하지 않는다.**
 
-## 6단계 — 오류 대응 연습
+## 8단계 — 오류 대응 연습
 
 | 상황 | 교사가 먼저 확인할 항목 |
 |---|---|
@@ -72,7 +87,7 @@ mosquitto_pub -h 192.168.0.10 -p 1883 -u classroom -P '비밀번호' -t 'robotta
 | 버튼 누르니 화면이 멈춤 | 네트워크 연결을 Tkinter 메인 스레드에서 동기적으로 기다리지는 않나? |
 | 연결 끊긴 후 로봇이 계속 움직임 | **실물 로봇 테스트 중단**. 로봇 내부 watchdog이 먼저 필요 |
 
-## 7단계 — EV3 Legendary 연결 준비
+## 9단계 — EV3 Legendary 연결 준비
 
 - [ ] 기존 손 씻기 스테이션 v8의 Web Serial 연결 코드, 실제 수신 데이터 확인
 - [ ] [시리얼 장치 목록 확인](../../examples/mqtt-iot/ev3_serial_ports.py)

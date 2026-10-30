@@ -42,15 +42,21 @@ Tkinter 조종기  --publish-->  [MQTT server]  --subscribe-->  Tkinter 수신 U
 
 학생 두 명은 직접 TCP 연결을 만드는 것이 아니라 **같은 브로커를 통해 publish/subscribe**합니다. 교실에서는 교사 PC 또는 Raspberry Pi 4에 브로커를 두는 것을 권장합니다.
 
+## 학습 단계: GUI보다 콘솔이 먼저
+
+**1차시 개념 → 2차시 콘솔 단방향 → 3차시 콘솔 양방향 → 4차시 Tkinter 채팅 → 5차시 Tkinter 로봇 명령.**
+
+처음 3차시에는 Tkinter GUI나 EV3를 연결하지 않습니다. 보내고 받은 메시지가 Thonny Shell에 나타나는 것부터 확인합니다. 메시지 통신과 GUI는 서로 다른 학습 내용이므로 단계적으로 결합합니다.
+
 ## 12차시 계획
 
 | 차시 | 수업 주제 | 결과물 | 주요 개념 |
 |---:|---|---|---|
 | [01](lessons/lesson-01.md) | 네트워크와 IoT 이해 | 메시지 전달 구조도·토픽 설계 | IP, 서버/클라이언트, 브로커 |
-| [02](lessons/lesson-02.md) | MQTT 송신 실습 | 문자열 메시지 송신 | publish, broker, topic |
-| [03](lessons/lesson-03.md) | 두 컴퓨터 대화 | Tkinter 채팅 앱 | subscribe, callback, queue |
-| [04](lessons/lesson-04.md) | 로봇 조종 UI 설계 | Tkinter 방향 버튼 패널 | 이벤트, 기능 분리 |
-| [05](lessons/lesson-05.md) | 명령 메시지 만들기 | JSON 명령 보내기 | 프로토콜, 명령 코드 |
+| [02](lessons/lesson-02.md) | **콘솔 단방향 메시지** | Thonny Shell에서 송신·수신 확인 | publish, subscribe, print |
+| [03](lessons/lesson-03.md) | **콘솔 양방향 채팅** | 두 PC에서 직접 입력하고 출력 | input, print, on_message |
+| [04](lessons/lesson-04.md) | **Tkinter 채팅 UI** | 콘솔 채팅을 GUI로 변환 | Entry, Text, Button, queue |
+| [05](lessons/lesson-05.md) | **Tkinter 원격조종 명령** | 버튼 클릭 → JSON 명령 발행 | Button, lambda, json, publish |
 | [06](lessons/lesson-06.md) | 다른 PC에서 받아 실행하기 | Canvas 로봇 시뮬레이터 | 수신·검증·처리 |
 | [07](lessons/lesson-07.md) | 결과를 다시 보내기 | 양방향 상태 표시 | cmd/status, 왕복 통신 |
 | [08](lessons/lesson-08.md) | 통신 사고 예방 | 유효 시간, STOP, 중복 처리 | 안전, 재전송, fail-safe |
@@ -68,30 +74,29 @@ Tkinter 조종기  --publish-->  [MQTT server]  --subscribe-->  Tkinter 수신 U
 - 도전: 명령(topic cmd)과 상태(topic status)를 분리하는 이유 설명
 - 산출물: 전체 구조도
 
-### 02. 메시지 송신
-- 기본: MQTT 서버에 자신의 닉네임과 메시지 발행
-- 응용: 토픽을 바꿔 교실별로 구분
-- 도전: 브로커 접속 실패를 화면에 표시
-- 참고: [mqtt_chat.py](../../examples/mqtt-iot/mqtt_chat.py)
+### 02. 콘솔에서 처음 보내고 받기
+- **기본:** B에서 [step01_subscriber.py](../../examples/mqtt-iot/step01_subscriber.py)를 먼저 실행하고, A에서 [step02_publisher.py](../../examples/mqtt-iot/step02_publisher.py)를 실행
+- **응용:** 메시지 내용을 변경하고 B의 Thonny Shell에 바뀐 메시지가 출력되는지 확인
+- **도전:** 구독 토픽과 발행 토픽을 일부러 다르게 하여 결과 비교
+- 산출물: **'내 컴퓨터에서 전송 → 다른 컴퓨터 콘솔에 출력'** 성공
 
-### 03. 컴퓨터 A ↔ B 채팅
-- 기본: 서로 다른 두 PC에서 같은 토픽 구독 후 채팅
-- 응용: Enter 키로 송신, 닉네임 표시
-- 도전: 중복 송신과 네트워크 단절 시 동작 관찰
-- 중요: Paho 네트워크 콜백은 다른 스레드에서 실행되므로 Tkinter 위젯은 메인 스레드에서 업데이트
-- 참고: [mqtt_chat.py](../../examples/mqtt-iot/mqtt_chat.py)
+### 03. 콘솔 양방향 채팅
+- **기본:** A와 B 모두 [step03_console_chat.py](../../examples/mqtt-iot/step03_console_chat.py)를 실행하고 콘솔에서 메시지 주고받기
+- **응용:** 별명을 입력하고 A/B에서 각각 3문장씩 전송
+- **도전:** 한 프로그램이 발행과 구독을 모두 수행할 수 있다는 원리 설명
+- 산출물: **'input → publish → subscribe → print'** 왕복 통신
 
-### 04. 원격조종 UI
-- 기본: 전진/후진/좌회전/우회전/정지 버튼
-- 응용: 연결 상태 라벨
-- 도전: 다른 로봇 이름으로 토픽 바꾸기
-- 참고: [mqtt_controller.py](../../examples/mqtt-iot/mqtt_controller.py)
+### 04. Tkinter 채팅으로 전환
+- **기본:** [mqtt_chat.py](../../examples/mqtt-iot/mqtt_chat.py) 실행해 두 컴퓨터의 Tkinter 채팅
+- **응용:** Tkinter 입력창과 채팅창을 직접 바꾸고 GUI 배치
+- **도전:** MQTT 콜백에서 UI를 직접 수정하지 않고 queue + root.after()를 사용하는 이유 알아보기
+- 산출물: 버튼과 입력창이 있는 채팅 프로그램
 
-### 05. JSON 명령
-- 기본: action, id, sent_at, duration_ms, speed_pct의 역할 설명
-- 응용: 메시지를 파싱해서 허용 명령인지 확인
-- 도전: 오래된 명령·위험 속도 값을 거부
-- 참고: [protocol.py](../../examples/mqtt-iot/protocol.py)
+### 05. Tkinter 로봇 명령과 JSON
+- **기본:** [mqtt_controller.py](../../examples/mqtt-iot/mqtt_controller.py)에서 전진/후진/회전/정지 버튼 구성
+- **응용:** 명령의 Topic, `action`, `duration_ms`, `speed_pct` 읽고 변경 가능한 부분 확인
+- **도전:** [protocol.py](../../examples/mqtt-iot/protocol.py)를 이용해 오래되거나 위험한 명령 거부 이유 설명
+- 산출물: 실제 로봇 대신 다음 차시의 가상 수신기로 연결할 MQTT 조종기
 
 ### 06. 수신 PC 가상 로봇
 - 기본: 송신 PC에서 버튼 누르면 수신 PC의 Canvas 도형 이동

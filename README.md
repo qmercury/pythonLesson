@@ -22,7 +22,7 @@
 - [Tkinter 1~12차시 예제](examples/tkinter/README.md): 데스크톱 GUI와 파일 저장
 - [Flet 1~12차시 예제](examples/flet/README.md): Flet 설치 필요, PC/휴대폰 개발 테스트
 
-- [Tkinter + MQTT PC↔PC 실습](examples/mqtt-iot/README.md): 채팅·원격조종·수신 시뮬레이터 (실물 모터 제어는 구현 전)
+- [Tkinter + MQTT PC↔PC 실습](examples/mqtt-iot/README.md): **콘솔 단방향 → 콘솔 양방향 → Tkinter 채팅 → 로봇 제어 시뮬레이터** (실물 모터 제어는 구현 전)
 
 각 과정 커리큘럼 표에서 **차시 번호를 클릭하면** 바로 해당 Python 예제 파일이 열립니다.
 

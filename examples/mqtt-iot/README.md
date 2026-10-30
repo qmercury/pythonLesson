@@ -10,10 +10,11 @@ MQTT를 처음 배우는 학생은 복잡한 Tkinter 앱부터 시작하지 않�
 
 1. [step01_subscriber.py](step01_subscriber.py): **메시지를 받는 프로그램**. 처음에는 이 프로그램을 실행합니다.
 2. [step02_publisher.py](step02_publisher.py): **메시지를 보내는 프로그램**. 같은 서버/토픽으로 발행합니다.
-3. [mqtt_chat.py](mqtt_chat.py): Tkinter로 두 컴퓨터에서 채팅합니다.
-4. [mqtt_controller.py](mqtt_controller.py): Tkinter 원격조종 화면에서 명령을 만듭니다.
-5. [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py): 명령을 검증하고 가상 로봇을 움직입니다.
-6. [protocol.py](protocol.py): 안전 범위·시간·명령 ID 검사 규칙을 배웁니다.
+3. [step03_console_chat.py](step03_console_chat.py): **두 컴퓨터에서 콘솔로 양방향 채팅**합니다.
+4. [mqtt_chat.py](mqtt_chat.py): 콘솔 통신이 이해되면 Tkinter 채팅으로 확장합니다.
+5. [mqtt_controller.py](mqtt_controller.py): Tkinter 원격조종 화면에서 명령을 만듭니다.
+6. [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py): 명령을 검증하고 가상 로봇을 움직입니다.
+7. [protocol.py](protocol.py): 안전 범위·시간·명령 ID 검사 규칙을 배웁니다.
 
 각 소스 파일에 **한글 주석**을 넣어 중요한 함수, MQTT 콜백, GUI 이벤트, 메시지 검증 절차를 설명합니다.
 
@@ -92,14 +93,22 @@ python3 mqtt_chat.py
 
 > Thonny에서 F5로 실행하는 경우 터미널의 `export` 값이 자동 전달되지 않을 수 있습니다. 수업 전 **Thonny에서 실제 실행 환경변수를 지정하거나**, 교사가 별도 로컬 설정/런처 스크립트를 준비해야 합니다. 교실 비밀번호는 GitHub에 넣지 않습니다.
 
-## 3. 두 학생 간 채팅부터 테스트
+## 3. 가장 먼저 — 콘솔에 메시지 출력하기
+
+**2차시 단방향 통신:** B 컴퓨터의 Thonny에서 `step01_subscriber.py`를 실행하고 메시지를 기다립니다. A 컴퓨터에서 `step02_publisher.py`를 실행합니다. B의 **Shell**에 '받음' 메시지가 출력됩니다.
+
+**3차시 양방향 통신:** 양쪽 컴퓨터에서 `step03_console_chat.py`를 실행하고 별명을 입력한 뒤, 각자의 Shell에 메시지를 입력하며 서로 채팅합니다. 같은 Topic을 구독하므로 자신이 보낸 메시지도 수신됩니다.
+
+**4차시 Tkinter 전환:** 콘솔에서 채팅을 충분히 이해한 후에만 `mqtt_chat.py`로 GUI 채팅을 진행합니다. MQTT 통신 원리 자체는 바뀌지 않습니다.
+
+## 4. 두 학생 간 Tkinter 채팅부터 테스트
 
 - 학생 A PC: `mqtt_chat.py` 실행
 - 학생 B PC: `mqtt_chat.py` 실행
 - 두 PC에서 같은 room과 브로커로 연결한 뒤, 서로 메시지를 보내 보세요.
 - 대화 기록은 앱 실행 중에만 표시되며 브로커에 retained/persistent 메시지로 저장하지 않습니다.
 
-## 4. PC A가 조종하고 PC B가 수신하기
+## 5. PC A가 조종하고 PC B가 수신하기
 
 - **학생 A:** `mqtt_controller.py` 실행
 - **학생 B:** `mqtt_gateway_simulator.py` 실행
@@ -107,7 +116,7 @@ python3 mqtt_chat.py
 - 학생 A가 버튼을 누르면 학생 B의 Canvas 가상 로봇이 반응합니다.
 - 학생 B는 `status` 토픽으로 실행 결과를 보내고 학생 A의 화면에 표시됩니다.
 
-## 5. 메시지 예시 및 토픽
+## 6. 메시지 예시 및 토픽
 
 ```text
 robottagram/class01/robot01/cmd
@@ -128,7 +137,7 @@ JSON 명령은 예를 들어 다음과 같은 형태입니다:
 - MQTT QoS 1은 중복 배달 가능성이 있으므로 메시지 ID로 중복 실행을 막습니다.
 - 송신 GUI의 "송신 요청" 표시는 로봇이 실제로 동작했다는 뜻이 아닙니다. status 응답을 확인합니다.
 
-## 6. 하드웨어 연결 시 필수 조건
+## 7. 하드웨어 연결 시 필수 조건
 
 **지금 예제는 실제 모터를 전혀 제어하지 않습니다.** 실제 로봇 어댑터는 다음 방식으로 별도 구현해야 합니다.
 
@@ -162,6 +171,9 @@ JSON 명령은 예를 들어 다음과 같은 형태입니다:
 
 | 파일 | 학습 목표 |
 |---|---|
+| [step01_subscriber.py](step01_subscriber.py) | 콘솔 단방향 수신 |
+| [step02_publisher.py](step02_publisher.py) | 콘솔 단방향 발행 |
+| [step03_console_chat.py](step03_console_chat.py) | 콘솔 양방향 채팅 |
 | [mqtt_chat.py](mqtt_chat.py) | 두 컴퓨터 간 Tkinter 채팅 |
 | [mqtt_controller.py](mqtt_controller.py) | MQTT 명령 발행·상태 구독 |
 | [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py) | 명령 검증·수신·시뮬레이터·상태 발행 |

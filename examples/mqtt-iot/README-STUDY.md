@@ -15,9 +15,21 @@
 
 **질문:** 구독자와 발행자의 `ROOM`이 서로 다르면 어떻게 될까요?
 
-## 단계 2. Tkinter로 채팅
+## 단계 2. 콘솔에서 양방향 채팅
 
-3. [mqtt_chat.py](mqtt_chat.py) — 다른 컴퓨터와 채팅
+3. [step03_console_chat.py](step03_console_chat.py) — 두 PC에서 **같은 프로그램**을 실행하고 직접 입력/출력하기
+
+**코드에서 찾아볼 명령어:**
+- `input("보낼 메시지: ")`: Thonny Shell에서 문자열 입력
+- `client.publish(TOPIC, ...)`: MQTT 브로커로 전송
+- `on_message(...)`: 메시지를 받으면 자동 호출
+- `print(...)`: 받은 메시지를 Shell에 출력
+
+**질문:** 한 컴퓨터가 보내기와 받기를 동시에 할 수 있을까요? 왜 자기 메시지도 표시될까요?
+
+## 단계 3. Tkinter로 채팅
+
+4. [mqtt_chat.py](mqtt_chat.py) — 콘솔 대신 Tkinter 화면에서 채팅
 
 **코드에서 찾아볼 명령어:**
 - `ttk.Entry(...)`: 사용자 입력
@@ -27,11 +39,11 @@
 
 **질문:** 왜 `on_message`에서 바로 라벨을 바꾸지 않을까요?
 
-## 단계 3. 메시지로 로봇 조종
+## 단계 4. 메시지로 로봇 조종
 
-4. [protocol.py](protocol.py) — 명령 카드 형식과 검사
-5. [mqtt_controller.py](mqtt_controller.py) — 전진·후진·회전 버튼
-6. [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py) — PC B의 가상 로봇
+5. [protocol.py](protocol.py) — 명령 카드 형식과 검사
+6. [mqtt_controller.py](mqtt_controller.py) — 전진·후진·회전 버튼
+7. [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py) — PC B의 가상 로봇
 
 **코드에서 찾아볼 명령어:**
 - `make_command("forward")`: 정해진 형식의 명령 카드 만들기
@@ -42,7 +54,7 @@
 
 **질문:** A에서 송신 요청을 확인한 것과 B에서 실제 명령을 실행했다는 것은 왜 다를까요?
 
-## 단계 4. EV3 Legendary 실물 연결
+## 단계 5. EV3 Legendary 실물 연결
 
 - [ev3_serial_ports.py](ev3_serial_ports.py): 어떤 직렬포트가 보이는지 **조회만** 한다.
 - [EV3 시리얼 설계](../../docs/ev3-legendary-serial.md): 기존 손 씻기 스테이션 v8과 연결.
