@@ -80,3 +80,12 @@ ft.run(main)
 - Flet 실행: https://flet.dev/docs/getting-started/running-app/
 - Flet 모바일 테스트: https://flet.dev/docs/getting-started/testing-on-mobile/
 - Flet 패키징: https://flet.dev/docs/publish/
+
+## Tkinter + MQTT IoT 심화 실습
+
+- Tkinter 자체는 데스크톱 Python 표준 라이브러리입니다. MQTT 통신은 `paho-mqtt>=2,<3` 패키지를 추가 설치합니다.
+- 학생 PC의 브로커 주소 `MQTT_HOST`에는 교실 서버의 실제 사설 IP를 입력해야 합니다. `127.0.0.1`은 해당 PC 자신을 뜻합니다.
+- MQTT 사용자명/비밀번호는 교사가 관리하고 GitHub에 넣지 않습니다. 공개 인터넷의 인증 없는 브로커는 실물 로봇 제어용으로 사용하지 않습니다.
+- [IoT 예제 실행 방법](../examples/mqtt-iot/README.md)에서 채팅 → 원격조종 → 가상 로봇 순서로 실습합니다.
+- MQTT 통신용 백그라운드 스레드에서 Tkinter 위젯을 직접 수정하지 말고 `queue.Queue` + `root.after()`로 메인 스레드에 전달합니다.
+- 실제 EV3/SPIKE Prime 하드웨어를 움직이는 브리지는 기종·펌웨어·포트별로 개발 및 안전 검증이 필요합니다. 예제의 시뮬레이터는 실제 모터를 제어하지 않습니다.

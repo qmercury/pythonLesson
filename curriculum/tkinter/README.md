@@ -144,3 +144,7 @@ root.mainloop()
 - 90분 수업 및 포트폴리오 방식은 [운영 기준](../../docs/teaching-guide.md) 참조.
 
 [전체 과정으로 돌아가기](../../README.md)
+
+## 심화 연계 — 두 학생의 Tkinter 앱을 네트워크로 연결
+
+Tkinter 11~12차시의 앱 개발을 마친 학생은 [MQTT IoT 심화 12차시](../mqtt-iot/README.md)로 이어갈 수 있습니다. 이 과정에서는 학생 A PC의 버튼을 누르면 학생 B PC의 Tkinter 프로그램이 MQTT로 명령을 받고, 이후 별도의 로봇 브리지를 통해 EV3 또는 SPIKE Prime을 제어하는 프로젝트를 설계합니다. [통신 실습 예제](../../examples/mqtt-iot/README.md)를 먼저 사용하여 모터 연결 전에 안전하게 검증합니다.

@@ -9,10 +9,11 @@
 | **Python 크리에이티브 코딩 1 — Turtle** | 12 | 그래픽, 좌표, 이벤트, 가상 로봇 시뮬레이션 | [Turtle 커리큘럼](curriculum/turtle/README.md) |
 | **Python 크리에이티브 코딩 2 — Tkinter** | 12 | GUI, 입력, 데이터 처리, 데스크톱 앱 개발 | [Tkinter 커리큘럼](curriculum/tkinter/README.md) |
 | **Python 크리에이티브 코딩 3 — Flet** | 12 *(초안)* | PC·웹·모바일 앱 개발, 화면 구성, 배포 | [Flet 커리큘럼](curriculum/flet/README.md) |
+| **Python 네트워크·IoT 심화 — Tkinter + MQTT + LEGO 로봇** | 12 *(설계)* | PC↔PC 통신, MQTT, 로봇 명령·상태, IoT | [IoT 커리큘럼](curriculum/mqtt-iot/README.md) |
 
 **대상:** 레고 SPIKE Prime에서 Python의 변수·조건문·반복문·함수를 배운 초등 4~6학년 학생  
 **수업 기준:** 각 차시 90분(학급 상황에 맞게 조정)  
-**학습 흐름:** SPIKE Prime Python → Turtle → Tkinter → Flet
+**학습 흐름:** SPIKE Prime Python → Turtle → Tkinter → Flet(모바일 개발) **또는** Tkinter + MQTT(로봇 IoT 심화)
 
 
 ## 차시별 실행 예제 (총 36개)
@@ -20,6 +21,8 @@
 - [Turtle 1~12차시 예제](examples/turtle/README.md): Thonny에서 F5 실행 (추가 설치 없음)
 - [Tkinter 1~12차시 예제](examples/tkinter/README.md): 데스크톱 GUI와 파일 저장
 - [Flet 1~12차시 예제](examples/flet/README.md): Flet 설치 필요, PC/휴대폰 개발 테스트
+
+- [Tkinter + MQTT PC↔PC 실습](examples/mqtt-iot/README.md): 채팅·원격조종·수신 시뮬레이터 (실물 모터 제어는 구현 전)
 
 각 과정 커리큘럼 표에서 **차시 번호를 클릭하면** 바로 해당 Python 예제 파일이 열립니다.
 
@@ -31,6 +34,8 @@
 - [Tkinter 12차시](curriculum/tkinter/README.md)
 - [Tkinter 1차시 상세 지도안](curriculum/tkinter/lesson-01.md)
 - [Flet 12차시 초안](curriculum/flet/README.md)
+- [Tkinter + MQTT + LEGO 로봇 IoT 12차시 설계](curriculum/mqtt-iot/README.md)
+- [MQTT 양방향 통신 실습 코드](examples/mqtt-iot/README.md)
 - [교수·학습 운영 기준](docs/teaching-guide.md)
 - [Thonny 및 개발환경 안내](docs/environment.md)
 
@@ -46,7 +51,8 @@
 
 - Turtle, Tkinter: **12차시 교육과정 1차 정리**
 - Tkinter 1차시: **상세 지도안**
-- Flet: **휴대폰 테스트를 포함한 12차시 설계 초안** (실습 예제와 사용 버전은 개강 전 검증)
+- Flet: **휴대폰 테스트를 포함한 12차시 설계 초안**
+- MQTT IoT: **12차시 심화 설계 및 PC 통신/시뮬레이터 예제**, EV3/SPIKE 실제 모터 제어 어댑터는 장비별 검증 후 추가 (실습 예제와 사용 버전은 개강 전 검증)
 - 수업별 학생 코드, 정답 코드, 워크시트: **추가 예정**
 
 참고: [Python turtle 문서](https://docs.python.org/ko/3/library/turtle.html) · [Python tkinter 문서](https://docs.python.org/ko/3/library/tkinter.html) · [Thonny](https://thonny.org/) · [Flet 공식 문서](https://flet.dev/docs/)
