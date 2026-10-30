@@ -40,6 +40,15 @@
 - [교수·학습 운영 기준](docs/teaching-guide.md)
 - [Thonny 및 개발환경 안내](docs/environment.md)
 
+
+### MQTT 교사용·학생용 학습자료
+
+- [교사용 MQTT 입문 교재](curriculum/mqtt-iot/TEACHER-HANDBOOK.md): 방송실 비유, 메시지 흐름, QoS/Retain, Tkinter와 스레드, 안전 원칙
+- [교사 사전 실습 및 수업 전 점검표](curriculum/mqtt-iot/TEACHER-PRACTICE.md): 브로커·두 PC·가상 로봇 시험 순서
+- [MQTT 용어 카드 및 예상 질문](curriculum/mqtt-iot/GLOSSARY-FAQ.md): 학생용 설명과 정답
+- [MQTT 12차시 학생·교사용 수업지](curriculum/mqtt-iot/README.md): 차시별 목표, 시연, 기본·응용·도전 미션
+- [MQTT 코드 학습 순서](examples/mqtt-iot/README-STUDY.md): 작은 publish/subscribe부터 Tkinter 조종기까지
+
 ## 수업 원칙
 
 1. 문법을 다시 나열하기보다 **새로운 프로그램을 만들기 위해 문법을 활용**한다.

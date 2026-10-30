@@ -3,6 +3,25 @@
 > 현재 제공 범위: **PC↔PC 실제 MQTT 통신 + Tkinter 양방향 제어 UI + Canvas 시뮬레이터**.
 > 로봇 하드웨어를 움직이는 EV3·SPIKE 드라이버는 아직 구현하지 않았습니다.
 
+
+## 먼저 시작할 쉬운 예제와 꼼꼼한 코드 주석
+
+MQTT를 처음 배우는 학생은 복잡한 Tkinter 앱부터 시작하지 않습니다.
+
+1. [step01_subscriber.py](step01_subscriber.py): **메시지를 받는 프로그램**. 처음에는 이 프로그램을 실행합니다.
+2. [step02_publisher.py](step02_publisher.py): **메시지를 보내는 프로그램**. 같은 서버/토픽으로 발행합니다.
+3. [mqtt_chat.py](mqtt_chat.py): Tkinter로 두 컴퓨터에서 채팅합니다.
+4. [mqtt_controller.py](mqtt_controller.py): Tkinter 원격조종 화면에서 명령을 만듭니다.
+5. [mqtt_gateway_simulator.py](mqtt_gateway_simulator.py): 명령을 검증하고 가상 로봇을 움직입니다.
+6. [protocol.py](protocol.py): 안전 범위·시간·명령 ID 검사 규칙을 배웁니다.
+
+각 소스 파일에 **한글 주석**을 넣어 중요한 함수, MQTT 콜백, GUI 이벤트, 메시지 검증 절차를 설명합니다.
+
+- [학생용 코드 읽는 순서](README-STUDY.md)
+- [교사용 MQTT 입문 교재](../../curriculum/mqtt-iot/TEACHER-HANDBOOK.md)
+- [교사용 사전 실습](../../curriculum/mqtt-iot/TEACHER-PRACTICE.md)
+- [12차시 수업 자료](../../curriculum/mqtt-iot/README.md)
+
 ## 준비물
 
 - 교사 서버: 동일 교실 LAN의 Raspberry Pi 4 또는 PC에 설치한 MQTT 브로커(Mosquitto 추천)

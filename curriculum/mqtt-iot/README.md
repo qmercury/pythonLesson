@@ -2,6 +2,19 @@
 
 > Python 문법 → GUI → **다른 컴퓨터와 통신** → **실제 로봇 제어**로 확장하는 로보타그램 심화 과정
 
+
+## 교사·학생 자료 먼저 보기
+
+이 과정은 교사가 MQTT를 처음 배우는 경우도 고려합니다. **수업을 시작하기 전에 다음 순서로 읽는 것을 권장합니다.**
+
+1. [교사용 MQTT 입문 교재](TEACHER-HANDBOOK.md) — Publisher, Broker, Subscriber, Topic, QoS, Retain 설명과 수업 예시
+2. [교사 사전 실습·환경 점검표](TEACHER-PRACTICE.md) — 브로커 설치 및 두 컴퓨터 연결 확인
+3. [용어 카드·예상 질문과 답](GLOSSARY-FAQ.md) — 학생 눈높이의 설명
+4. [학생·교사용 12차시 수업지](lessons/lesson-01.md) — 각 차시의 설명 문장, 실습, 미션, 예상 오류
+5. [주석 달린 예제 코드 학습 순서](../../examples/mqtt-iot/README-STUDY.md) — 작은 송신/수신부터 로봇 시뮬레이터까지
+
+**참고:** 예제에서 MQTT 메시지는 실제로 두 PC 사이를 오가지만, EV3 Legendary의 컴퓨터 → 로봇 제어는 별도 검증 전입니다.
+
 ## 목표와 전제
 
 - 대상: SPIKE Prime Python 기초, Tkinter의 Label/Button/Entry/이벤트를 배운 학생
@@ -33,18 +46,18 @@ Tkinter 조종기  --publish-->  [MQTT server]  --subscribe-->  Tkinter 수신 U
 
 | 차시 | 수업 주제 | 결과물 | 주요 개념 |
 |---:|---|---|---|
-| 01 | 네트워크와 IoT 이해 | 메시지 전달 구조도·토픽 설계 | IP, 서버/클라이언트, 브로커 |
-| 02 | MQTT 송신 실습 | 문자열 메시지 송신 | publish, broker, topic |
-| 03 | 두 컴퓨터 대화 | Tkinter 채팅 앱 | subscribe, callback, queue |
-| 04 | 로봇 조종 UI 설계 | Tkinter 방향 버튼 패널 | 이벤트, 기능 분리 |
-| 05 | 명령 메시지 만들기 | JSON 명령 보내기 | 프로토콜, 명령 코드 |
-| 06 | 다른 PC에서 받아 실행하기 | Canvas 로봇 시뮬레이터 | 수신·검증·처리 |
-| 07 | 결과를 다시 보내기 | 양방향 상태 표시 | cmd/status, 왕복 통신 |
-| 08 | 통신 사고 예방 | 유효 시간, STOP, 중복 처리 | 안전, 재전송, fail-safe |
-| 09 | EV3 Legendary 시리얼 브리지 | Web Serial과 pyserial 방식 비교 | MQTT와 직렬포트 연결 |
-| 10 | EV3 Legendary 실제 연결 | 손 씻기 스테이션 v8 통신 활용, 저속 모터 실험 | Bluetooth Classic 직렬통신 *(명령 형식 검증)* |
-| 11 | IoT 종합 프로젝트 | 원격 조종+상태 시각화 | 시스템 통합 |
-| 12 | 다른 팀과 교차 테스트·발표 | 시연과 연구일지 | 테스트, 원인 분석, 개선 |
+| [01](lessons/lesson-01.md) | 네트워크와 IoT 이해 | 메시지 전달 구조도·토픽 설계 | IP, 서버/클라이언트, 브로커 |
+| [02](lessons/lesson-02.md) | MQTT 송신 실습 | 문자열 메시지 송신 | publish, broker, topic |
+| [03](lessons/lesson-03.md) | 두 컴퓨터 대화 | Tkinter 채팅 앱 | subscribe, callback, queue |
+| [04](lessons/lesson-04.md) | 로봇 조종 UI 설계 | Tkinter 방향 버튼 패널 | 이벤트, 기능 분리 |
+| [05](lessons/lesson-05.md) | 명령 메시지 만들기 | JSON 명령 보내기 | 프로토콜, 명령 코드 |
+| [06](lessons/lesson-06.md) | 다른 PC에서 받아 실행하기 | Canvas 로봇 시뮬레이터 | 수신·검증·처리 |
+| [07](lessons/lesson-07.md) | 결과를 다시 보내기 | 양방향 상태 표시 | cmd/status, 왕복 통신 |
+| [08](lessons/lesson-08.md) | 통신 사고 예방 | 유효 시간, STOP, 중복 처리 | 안전, 재전송, fail-safe |
+| [09](lessons/lesson-09.md) | EV3 Legendary 시리얼 브리지 | Web Serial과 pyserial 방식 비교 | MQTT와 직렬포트 연결 |
+| [10](lessons/lesson-10.md) | EV3 Legendary 실제 연결 | 손 씻기 스테이션 v8 통신 활용, 저속 모터 실험 | Bluetooth Classic 직렬통신 *(명령 형식 검증)* |
+| [11](lessons/lesson-11.md) | IoT 종합 프로젝트 | 원격 조종+상태 시각화 | 시스템 통합 |
+| [12](lessons/lesson-12.md) | 다른 팀과 교차 테스트·발표 | 시연과 연구일지 | 테스트, 원인 분석, 개선 |
 
 ## 차시별 미션과 결과물
 
