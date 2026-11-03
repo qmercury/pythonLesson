@@ -1,0 +1,5 @@
+**/main.py
+**/cleaning_record.json
+**/__pycache__/
+**/*.pyc
+**/sender.py

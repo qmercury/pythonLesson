@@ -69,3 +69,10 @@
 
 ---
 문서 작성 기준일: 2026-10-29
+
+## Python 심화 8차시 — 데이터로 움직이는 로봇
+
+- [8차시 학습 계획·이론·미션](curriculum/python-advanced/README.md)
+- [학생용 실습 예제](examples/python-advanced/README.md)
+
+SPIKE Prime 및 Turtle 미로를 배운 학생들이 자료구조, 탐색, 데이터 분석, Tkinter, JSON, MQTT를 익히는 과정입니다. 학생들은 `lesson-XX.py`를 `main.py`로 복사해 실습합니다.
